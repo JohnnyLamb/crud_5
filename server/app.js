@@ -12,7 +12,7 @@ dotenv.load();
 
 // *** routes *** //
 var routes = require('./routes/index.js');
-
+var lamas = require('./routes/api.js');
 
 // *** express instance *** //
 var app = express();
@@ -38,7 +38,7 @@ app.use(express.static(path.join(__dirname, '../client/public')));
 
 // *** main routes *** //
 app.use('/', routes);
-
+app.use('/api/',lamas);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
