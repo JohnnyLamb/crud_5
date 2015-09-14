@@ -6,10 +6,50 @@
 {% block content %}
 
   <div class="container">
+  <div class="row">
+  <div class='col-md-6'>
+    <form id="new-lama">
+    <h1>Add a Lama</h1>
+    <div class="form-group">
+      <input type="text" class="form-control" id="name" placeholder="name" required>
+    </div>
+    <div class="form-group">
+      <input type="number" class="form-control" id="age" placeholder="age" required>
+    </div>
 
-    <h1>{{ title }}</h1>
-    <p>Welcome to {{ title }}</p>
 
+    <div class="form-group">
+    <label>
+      <input type="checkbox" id="spitter"required>
+       </label>
+    </div>
+
+
+    <button type="submit" class="btn btn-default">MAKE THAT LAMA</button>
+  </form>
+
+  <div class='message-section'>
+  <p id="message"></p>
   </div>
+
+  <div class='col-md-6'>
+    <div id="lama-table">
+      <h2>All Lamas</h2>
+        <div>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Spitter</th>
+              </tr>
+            </thead>
+            <tbody id="all">
+            </tbody>
+        </table>
+       </div>
+      </div>
+    </div>
+   </div>
 
 {% endblock %}

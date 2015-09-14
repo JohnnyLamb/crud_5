@@ -60,14 +60,16 @@ router.put('/lama/:id', function(req, res, next) {
 });
 // // delete SINGLE Lama
 
-// router.delete('/lama/:id',function(req,res,next){
-//   Lama.find(function(err,data){
-
-
-//   });
-// });
-
-
-
+router.delete('/lama/:id',function(req,res,next){
+  Lama.findByIdAndRemove(req.params.id,function(err,data){
+    if (err) {
+          res.json({
+            'message': err
+          });
+        } else {
+          res.json(data);
+        }
+  });
+});
 
 module.exports = router;
