@@ -4,9 +4,10 @@ var Schema =  mongoose.Schema;
 
 var Lama = new Schema(
     {
-      name:String,
-      spitter: Boolean,
-      age: Number
+      name: String,
+      age: Number,
+      spitter: Boolean
+
     }
   );
 
