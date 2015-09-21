@@ -1,42 +1,32 @@
-$(document).on('ready', function() {
-  console.log('sanity check!');
-});
+var app = angular.module('myApp', []);
 
-$('form').on("submit", function(e) {
-  e.preventDefault();
+app.controller('lamaController', function($scope, $http) {
+// GET request to get all lamas
+    $scope.lamas ={};
 
-  var payload = {
-    name: $('#name').val(),
-    age: $('#age').val(),
-    spitter: spitter
+    $http.get('api/lamas')
+      .success(function(data) {
+        $scope.lamas = data;
+        console.log(data);
+      })
+      .error(function(data) {
+        console.log('Error:' + data);
+      });
+
+
+// POST FUNCTION to create lama and send to DATABASE
+  $scope.addLama = function() {
+    $scope.payload = {
+      'name': $scope.name,
+      'age': $scope.age
+    };
+    $http.post('/api/lamas', $scope.payload)
+      .success(function(data) {
+        $scope.lamas.push(data);
+        console.log($scope.payload);
+      })
+      .error(function(data) {
+        console.log('Error: ' + data);
+      });
   };
-  if ($('#spitter').is(':checked')) {
-    payload.spitter = true;
-  } else {
-
-    payload.spitter = false;
-  }
-  $.post('/api/lamas', payload, function(lamas) {
-    $('.message-section').show();
-    $('#message').html('Added ' + lamas.name + " " + lamas.age + lamas.spitter);
-    console.log(lamas);
-    getLamas();
-  });
-
 });
-
-function getLamas() {
-  $('#all-lamas').html('');
-  $.get('/api/lamas', function(lama) {
-    for(var i = 0; i < lama.length; i++) {
-        $('#all-lamas').prepend('<tr>' +
-        '<td>' + lama[i].name + '</td>' +
-        '<td>' + lama[i].age + '</td>' + lama[i].spitter + '</td>'
-         );
-        $('form input').val('');
-        $('#spitter').removeAttr('checked');
-    }
-  });
-}
-
-

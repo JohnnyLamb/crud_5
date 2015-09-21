@@ -4,17 +4,17 @@
 
 
 {% block content %}
-
-  <div class="container">
+{%raw%}
+  <div class="container" ng-controller="lamaController">
   <div class="row">
   <div class='col-md-6'>
     <form id="new-lama">
     <h1>Add a Lama</h1>
     <div class="form-group">
-      <input type="text" class="form-control" id="name" placeholder="name" required>
+      <input type="text" class="form-control" id="name" placeholder="name" ng-model="name" required>
     </div>
     <div class="form-group">
-      <input type="number" class="form-control" id="age" placeholder="age" required>
+      <input type="number" class="form-control" id="age" placeholder="age" ng-model="age" required>
     </div>
 
 
@@ -25,7 +25,7 @@
     </div>
 
 
-    <button type="submit" class="btn btn-default">MAKE THAT LAMA</button>
+    <button ng-click="addLama()"  class="btn btn-default">MAKE THAT LAMA</button>
   </form>
 
   <div class='message-section'>
@@ -43,7 +43,11 @@
                 <th>Spitter</th>
               </tr>
             </thead>
-            <tbody id="all-lamas">
+            <tbody id="all-lamas" >
+              <tr ng-repeat="lama in lamas">
+                <td>{{lama.name}}</td>
+                <td>{{lama.age}}</td>
+              </tr>
             </tbody>
         </table>
        </div>
@@ -51,5 +55,5 @@
    </div>
    </div>
    </div>
-
+{% endraw %}
 {% endblock %}
